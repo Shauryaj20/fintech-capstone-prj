@@ -9,6 +9,20 @@
 * **Thin-File Handling:** To handle new-to-credit applicants safely, we engineered an `is_thin_file` binary flag to preserve the predictive signal of missing a history. We then imputed the missing bureau scores using the **training set median**. This was strictly calculated on the training split to prevent data leakage.
 * **Encoding:** `employment_type` was converted using One-Hot Encoding (`pd.get_dummies`) to prevent the model from inferring false ordinal math from text categories.
 
+## Risk-Based Pricing Table (Monotonicity Check)
+| Risk_Tier | Applicant_Count | Observed_Default_Rate | Assigned_Interest_Rate |
+| :--- | :--- | :--- | :--- |
+| Tier 1 (Lowest Risk) | 25 | 8.00% | 10% - 12% |
+| Tier 2 (Low Risk) | 25 | 12.00% | 13% - 15% |
+| Tier 3 (Medium Risk) | 25 | 20.00% | 16% - 18% |
+| Tier 4 (Highest Risk) | 25 | 40.00% | 19% - 24% |
+
+*Note: The table demonstrates strict monotonicity, as the observed default rate correctly increases alongside the assigned risk tier.*
+
+## Anomaly Detection (Isolation Forest)
+The Isolation Forest was run with a contamination rate of ~5.7% (15/265) on standardized behavioural features. 
+* **Recall Result:** The model correctly flagged 11 out of the 15 seeded `BTXNA*` anomalies, achieving a **73.33% recall rate**.
+
 ## Part D: Bias-Awareness Note
 Even without explicit protected attributes like gender, location, or caste in our dataset, lending models are highly susceptible to proxy bias. Features like `monthly_income_inr` can easily act as a proxy for gender due to systemic historical wage gaps, potentially leading the model to unfairly penalize female applicants. Furthermore, `employment_type` may correlate heavily with location and socioeconomic status; for instance, 'gig' workers might be geographically concentrated in specific urban zones or marginalized communities. Finally, relying strictly on `credit_bureau_score` can penalize historically underbanked demographics. While our inclusion of thin-file applicants mitigates some of this, those without formal credit histories often belong to lower-income or rural populations. If the model relies too heavily on these proxies, it risks perpetuating discriminatory lending practices.
 
