@@ -117,3 +117,33 @@ print("RISK-BASED PRICING TABLE (Monotonicity Check)")
 print("="*50)
 print(pricing_table.to_string(index=False))
 print("="*50 + "\n")
+
+# PART C: ANOMALY DETECTION
+from sklearn.ensemble import IsolationForest
+
+# 1. Load Data
+txn_df = pd.read_csv("txn_behaviour.csv")
+anomaly_features = ['txn_hour', 'is_new_device', 'txn_amount_inr']
+
+# 2. Standardize Features
+iso_scaler = StandardScaler()
+txn_scaled = iso_scaler.fit_transform(txn_df[anomaly_features])
+
+# 3. Train Isolation Forest
+contamination_rate = 15 / 265
+iso_forest = IsolationForest(random_state=42, contamination=contamination_rate)
+txn_df['anomaly_score'] = iso_forest.fit_predict(txn_scaled)
+
+# 4. Evaluate against seeded ground truth
+# In scikit-learn's IsolationForest, -1 indicates an anomaly
+flagged_anomalies = txn_df[txn_df['anomaly_score'] == -1]
+correctly_flagged = flagged_anomalies['txn_id'].str.startswith('BTXNA').sum()
+
+print("\n" + "="*50)
+print("PART C: ANOMALY DETECTION (Isolation Forest)")
+print("="*50)
+print(f"Total seeded anomalies: 15")
+print(f"Anomalies flagged by model: {len(flagged_anomalies)}")
+print(f"Correctly identified seeded anomalies: {correctly_flagged}")
+print(f"Recall on seeded anomalies: {correctly_flagged / 15:.2%}")
+print("="*50 + "\n")
