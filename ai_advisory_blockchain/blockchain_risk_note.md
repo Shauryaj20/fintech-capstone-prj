@@ -21,10 +21,10 @@ The T.A.N.G. (Temptation, Authority, Need, Greed) framework exposes critical soc
 
 * **1. Greed (Investment Scams):** 
 Fraudsters frequently exploit the "Greed" trigger by promising guaranteed, high-yield returns on fabricated crypto wealth products. Attackers build trust over time (often via messaging apps) and ultimately convince users to push funds via UPI to fraudulent exchanges or mule accounts.
-*   **Real-Time Defense Mechanism:** 
+**Real-Time Defense Mechanism:** 
 The platform should implement transactional velocity monitoring combined with beneficiary risk scoring. If a user attempts rapid, successive UPI transfers to a newly flagged, high-risk Virtual Asset Service Provider (VASP) or an unverified peer account, the system must intercept the transaction and enforce a mandatory 24-hour cooling-off period, alongside an in-app warning about unregulated high-yield scams.
 
-* **2. Authority (Impersonation):** 
+**2. Authority (Impersonation):** 
 Scammers frequently trigger the "Authority" reflex by impersonating Paytm lending officials, regulators, or police. Under the guise of "verifying account security" or "clearing an audit," they coerce panicked users into drawing down instant credit lines and immediately transferring the borrowed funds to the attacker.
 *   **Real-Time Defense Mechanism:** 
 Deploy behavioral biometrics and step-up authentication during the credit drawdown flow. If the interaction drastically deviates from the user's historical baseline (e.g., analyzing keystroke dynamics, swipe pressure, active phone call status, and device orientation), the credit disbursement is instantly suspended. The system then requires a human-in-the-loop maker-checker verification, such as a video KYC check, before releasing the funds.
