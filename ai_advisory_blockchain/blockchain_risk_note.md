@@ -19,9 +19,9 @@ Proponents often argue for crypto inclusion based on its historically low or neg
 ## 3. Applying the T.A.N.G. Framework
 The T.A.N.G. (Temptation, Authority, Need, Greed) framework exposes critical social-engineering vulnerabilities, particularly for a unified platform offering UPI payments, instant lending, and wealth management.
 
-* **1. Greed (Investment Scams):** 
+**1. Greed (Investment Scams):** 
 Fraudsters frequently exploit the "Greed" trigger by promising guaranteed, high-yield returns on fabricated crypto wealth products. Attackers build trust over time (often via messaging apps) and ultimately convince users to push funds via UPI to fraudulent exchanges or mule accounts.
-**Real-Time Defense Mechanism:** 
+*   **Real-Time Defense Mechanism:** 
 The platform should implement transactional velocity monitoring combined with beneficiary risk scoring. If a user attempts rapid, successive UPI transfers to a newly flagged, high-risk Virtual Asset Service Provider (VASP) or an unverified peer account, the system must intercept the transaction and enforce a mandatory 24-hour cooling-off period, alongside an in-app warning about unregulated high-yield scams.
 
 **2. Authority (Impersonation):** 
